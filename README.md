@@ -1,2 +1,3 @@
 # daily-fx-rates-czk
-Displays current czech national bank FX rates with possibility to calculate a currency amount from a specific amount of CZK
+
+React app that displays current czech national bank FX rates with possibility to calculate a currency amount for a specific amount of CZK
