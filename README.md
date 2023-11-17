@@ -1,4 +1,4 @@
-# daily-fx-rates-czk
+# CNB FX Daily Rates
 
 React app that displays current czech national bank FX rates with possibility to calculate a currency amount for a specific amount of CZK
 
@@ -26,4 +26,6 @@ After that you can access the app on http://localhost:3000
     npm run start
 ```
 
-After that you can access fetch CNB fx rates from http://localhost:9000/api
+After that you can fetch CNB fx rates from http://localhost:9000/api
+
+Alternatively you can use the deployed version of the server on https://cnb-fx-server.vercel.app/api (set REACT_APP_PROXY_SERVER_URL="https://cnb-fx-server.vercel.app" in .env file)
