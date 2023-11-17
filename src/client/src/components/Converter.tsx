@@ -29,7 +29,7 @@ export const Converter: FC<ConverterProps> = ({ rates }) => {
 
   return (
     <ConverterSection>
-      <h2>CURRENCY CONVERTER</h2>
+      <Title>CURRENCY CONVERTER</Title>
       <ConversionInner>
         <ConversionInputWrapper>
           <CZKLabel htmlFor="czk">CZK</CZKLabel>
@@ -54,6 +54,21 @@ export const Converter: FC<ConverterProps> = ({ rates }) => {
   );
 };
 
+const Title = styled.h2`
+  text-align: center;
+`;
+
+const ConverterSection = styled.section`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 40px 0;
+  background: rgb(255, 255, 255);
+  box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+  border-radius: 10px;
+  padding: 0 20px 20px;
+`;
+
 const ConversionInputWrapper = styled.div`
   display: flex;
   flex-direction: row;
@@ -75,6 +90,9 @@ const baseConversionStyles = css`
   outline: none;
   font-weight: 500;
   font-size: 1rem;
+  @media (max-width: 400px) {
+    font-size: 0.8rem;
+  }
 `;
 
 const CZKLabel = styled.label`
@@ -83,6 +101,9 @@ const CZKLabel = styled.label`
   height: 20px;
   padding: 10px;
   width: 50px;
+  @media (max-width: 400px) {
+    width: 40px;
+  }
 `;
 
 const CZKInput = styled.input`
@@ -91,6 +112,9 @@ const CZKInput = styled.input`
   height: 20px;
   width: 220px;
   border-radius: 0 10px 10px 0;
+  @media (max-width: 400px) {
+   width: 150px;
+  }
 }
 `;
 
@@ -99,6 +123,9 @@ const CurrencySelect = styled.select`
   border-radius: 10px 0 0 10px;
   font-family: 'Nunito Sans', sans-serif;
   width: 70px;
+  @media (max-width: 400px) {
+    width: 60px;
+  }
   height: 40px;
   padding: 10px;
   -webkit-appearance: none;
@@ -114,17 +141,9 @@ const ConversionResult = styled.div`
   padding: 10px;
   width: 220px;
   border-radius: 0 10px 10px 0;
-
   height: 20px;
-`;
-
-const ConverterSection = styled.section`
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  margin: 40px 0;
-  background: rgb(255, 255, 255);
-  box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
-  border-radius: 10px;
-  padding: 0 20px 20px;
+  @media (max-width: 400px) {
+    width: 150px;
+    font-size: 0.8rem;
+  }
 `;
