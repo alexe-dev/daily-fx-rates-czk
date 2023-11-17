@@ -19,6 +19,33 @@ const Footer = styled.footer`
   margin: 20px 0;
 `;
 
+const Loader = styled.div`
+  width: 48px;
+  height: 48px;
+  border: 5px solid #fff;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+
+  @keyframes rotation {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+`;
+
+const LoaderWrapper = styled.div`
+  min-height: 60vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 function App() {
   const { data, isPending } = useQuery({
     queryKey: ['fxRates'],
@@ -37,9 +64,15 @@ function App() {
     <>
       <Header />
       <MainWrapper>
-        {!isPending && processedData ? <RateList fxData={processedData} /> : null}
+        {!isPending && processedData ? (
+          <RateList fxData={processedData} />
+        ) : (
+          <LoaderWrapper>
+            <Loader />
+          </LoaderWrapper>
+        )}
         {processedData && <Converter rates={processedData.rates} />}
-        <Footer>Alex Alexeev 2023</Footer>
+        {!isPending && <Footer>Alex Alexeev 2023</Footer>}
       </MainWrapper>
     </>
   );
