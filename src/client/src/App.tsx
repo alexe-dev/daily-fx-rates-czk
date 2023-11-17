@@ -1,4 +1,6 @@
+import React from 'react';
 import styled from 'styled-components';
+import { useQuery } from '@tanstack/react-query';
 
 const Title = styled.h1`
   font-size: 2em;
@@ -7,7 +9,17 @@ const Title = styled.h1`
 `;
 
 function App() {
-  // 1. fetch data from API https://www.cnb.cz/en/financial-markets/foreign-exchange-market/central-bank-exchange-rate-fixing/central-bank-exchange-rate-fixing/daily.txt
+  // 1. fetch data from CNB API
+  const { data, isPending } = useQuery({
+    queryKey: ['fxRates'],
+    queryFn: async () => {
+      const response = await fetch('http://localhost:9000/proxy');
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.text();
+    },
+  });
   // 2. process data
   // 3. create table or stacked list component to display data, render it
   // 4. create form component to calculate amount
@@ -21,7 +33,7 @@ function App() {
         <Title>CNB FX Daily Rates</Title>
       </header>
       <main>
-        <section>{/* section for displaying Rates  */}</section>
+        <section>{isPending ? <div>Loading...</div> : data}</section>
         <section>{/* section for form to calculate amount */}</section>
       </main>
     </div>
