@@ -22,4 +22,4 @@ After that you can access the app on http://localhost:3000
     npm run start
 ```
 
-After that you can access the server on http://localhost:9000 (proxy route is well... /proxy)
+After that you can access fetch CNB fx rates from http://localhost:9000/api

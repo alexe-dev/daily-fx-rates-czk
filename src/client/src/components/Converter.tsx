@@ -36,7 +36,7 @@ export const Converter: FC<ConverterProps> = ({ rates }) => {
           <CZKInput id="czk" value={CZKAmount} type="text" onChange={handleAmountChange} />
         </ConversionInputWrapper>
         <ConversionInputWrapper>
-          <CurrencySelect onChange={(e) => setSelectedCurrency(e.target.value)} value={selectedCurrencyRate}>
+          <CurrencySelect onChange={(e) => setSelectedCurrency(e.target.value)} value={selectedCurrency}>
             {rates?.map((rate) => {
               return (
                 <option key={rate.currencyCode} value={rate.currencyCode}>
@@ -100,7 +100,7 @@ const CurrencySelect = styled.select`
   font-family: 'Nunito Sans', sans-serif;
   width: 70px;
   height: 40px;
-  padding: 6px;
+  padding: 10px;
   -webkit-appearance: none;
   -moz-appearance: none;
   background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");

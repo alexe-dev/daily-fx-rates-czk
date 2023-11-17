@@ -10,9 +10,10 @@ const queryClient = new QueryClient();
 
 const GlobalStyle = createGlobalStyle`
   body {
+    min-height: 100vh;
     font-family: 'Nunito Sans', sans-serif;
     background: rgb(255,255,255);
-background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(96,114,143,1) 98%);
+    background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(96,114,143,1) 98%);
     color: #333;
     font-weight: 500;
   }

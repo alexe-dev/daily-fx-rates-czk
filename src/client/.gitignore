@@ -24,3 +24,5 @@ yarn-error.log*
 
 bun.lockb
 .vercel
+.env*.local
+.env*.production

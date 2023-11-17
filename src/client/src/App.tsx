@@ -23,7 +23,7 @@ function App() {
   const { data, isPending } = useQuery({
     queryKey: ['fxRates'],
     queryFn: async () => {
-      const response = await fetch(`${process.env.REACT_APP_PROXY_SERVER_URL || 'http://localhost:9000'}/proxy`);
+      const response = await fetch(`${process.env.REACT_APP_PROXY_SERVER_URL || 'http://localhost:9000'}/api`);
       if (!response.ok) {
         throw new Error('Network response error');
       }
