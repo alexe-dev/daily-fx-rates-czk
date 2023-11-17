@@ -6,6 +6,9 @@ import { RateData } from '../../utils/processCNBData';
 const RateCard = styled.div`
   display: flex;
   width: 200px;
+  @media (max-width: 768px) {
+    width: 150px;
+  }
   flex-direction: row;
   align-items: center;
   padding: 10px;
