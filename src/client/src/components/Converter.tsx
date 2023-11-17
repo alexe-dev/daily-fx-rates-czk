@@ -83,6 +83,8 @@ const ConversionInner = styled.div`
 `;
 
 const baseConversionStyles = css`
+  display: flex;
+  align-items: center;
   box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.5), 0 0 0 5px transparent;
   background-color: #1c1c1e;
   color: #fff;
@@ -90,7 +92,7 @@ const baseConversionStyles = css`
   outline: none;
   font-weight: 500;
   font-size: 1rem;
-  @media (max-width: 400px) {
+  @media (max-width: 350px) {
     font-size: 0.8rem;
   }
 `;
@@ -101,7 +103,7 @@ const CZKLabel = styled.label`
   height: 20px;
   padding: 10px;
   width: 50px;
-  @media (max-width: 400px) {
+  @media (max-width: 350px) {
     width: 40px;
   }
 `;
@@ -112,7 +114,7 @@ const CZKInput = styled.input`
   height: 20px;
   width: 220px;
   border-radius: 0 10px 10px 0;
-  @media (max-width: 400px) {
+  @media (max-width: 350px) {
    width: 150px;
   }
 }
@@ -123,7 +125,7 @@ const CurrencySelect = styled.select`
   border-radius: 10px 0 0 10px;
   font-family: 'Nunito Sans', sans-serif;
   width: 70px;
-  @media (max-width: 400px) {
+  @media (max-width: 350px) {
     width: 60px;
   }
   height: 40px;
@@ -138,11 +140,12 @@ const CurrencySelect = styled.select`
 
 const ConversionResult = styled.div`
   ${baseConversionStyles}
+
   padding: 10px;
   width: 220px;
   border-radius: 0 10px 10px 0;
   height: 20px;
-  @media (max-width: 400px) {
+  @media (max-width: 350px) {
     width: 150px;
     font-size: 0.8rem;
   }
