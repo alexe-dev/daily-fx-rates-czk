@@ -15,14 +15,17 @@ export const useConverter = (rates: RateData[]) => {
       const value = e.currentTarget.value;
       // quick validation to prevent user from entering non numeric values
       // allows valid numbers (including 0 and numbers starting with 0) and empty string
-      // this is why ',' is not allowed, as having it results in NaN
+
       // it would require additional work to allow czech localized number input,
       // including parsing to Number from formatted by Intl.NumberFormat
-      if (Number.isNaN(+value)) {
+
+      // because of that, entering ',' for decimal is allowed but it is replaced with '.' for consistency
+      const valueWithDot = value.replace(',', '.');
+      if (Number.isNaN(+valueWithDot)) {
         return;
       }
 
-      setCZKAmount(value);
+      setCZKAmount(valueWithDot);
     },
     [setCZKAmount]
   );
