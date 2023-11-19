@@ -30,8 +30,8 @@ export const Converter: FC<ConverterProps> = ({ rates }) => {
             // there are many articles on why text is better option, here is one of them:
             // https://technology.blog.gov.uk/2020/02/24/why-the-gov-uk-design-system-team-changed-the-input-type-for-numbers/
             type="text"
-            inputMode="numeric"
-            pattern="^[0-9]*\.[0-9]*$"
+            inputMode="decimal"
+            pattern="[0-9]*"
             id="czk"
             value={CZKAmount ?? ''}
             onChange={handleAmountChange}
