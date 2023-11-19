@@ -15,7 +15,7 @@ export type FXRatesData = {
   rates: RateData[];
 };
 
-// TODO: test
+// TODO: add test
 
 export const processCNBData = (data: string): FXRatesData => {
   // TODO: refactor not to be so hacky, maybe move to server side

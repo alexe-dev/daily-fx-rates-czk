@@ -19,6 +19,7 @@ export const FooterWrapper = styled.footer`
   justify-content: center;
   align-items: center;
   font-size: 1.1rem;
+  font-weight: 500;
   color: rgb(255, 255, 255);
   margin: 50px 0 20px;
 `;

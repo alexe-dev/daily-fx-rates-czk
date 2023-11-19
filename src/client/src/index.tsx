@@ -11,7 +11,6 @@ const queryClient = new QueryClient();
 
 const GlobalStyle = createGlobalStyle`
   body {
-    min-height: 100vh;
     font-family: 'Nunito Sans', sans-serif;
     background: rgb(255,255,255);
     background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(96,114,143,1) 98%);
@@ -21,14 +20,15 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+
 root.render(
   <React.StrictMode>
-    <RateProvider>
-      <QueryClientProvider client={queryClient}>
+    <QueryClientProvider client={queryClient}>
+      <RateProvider>
         <GlobalStyle />
         <App />
-      </QueryClientProvider>
-    </RateProvider>
+      </RateProvider>
+    </QueryClientProvider>
   </React.StrictMode>
 );
 

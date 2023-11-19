@@ -1,9 +1,8 @@
 import { Header, Loader, Converter, RateList, FooterWrapper, MainWrapper, LoaderWrapper, Wrapper } from './components';
-import { useCNBData, useConverter } from './hooks';
-import { useContext } from 'react';
+import { useRateContext } from './contexts';
 
 function App() {
-  const { data, isPending, error } = useCNBData();
+  const { isDataPending: isPending, dataFetchingError: error, data } = useRateContext();
 
   return (
     <Wrapper>
@@ -14,7 +13,7 @@ function App() {
             <Loader />
           </LoaderWrapper>
         )}
-        {/* TODO: create error component */}
+        {/* TODO: create nice error component */}
         {!!error && <div>{error.message}</div>}
         {!!data && (
           <>

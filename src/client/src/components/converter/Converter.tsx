@@ -11,14 +11,13 @@ import {
 } from './styled';
 import { RateData } from '../../utils/processCNBData';
 import { useConverter } from '../../hooks';
-import { useRateContext } from '../../contexts';
 
 type ConverterProps = {
   rates: RateData[];
 };
 
 export const Converter: FC<ConverterProps> = ({ rates }) => {
-  const { result, CZKAmount, selectedCurrency, handleAmountChange, handleCurrencyChange } = useConverter(rates);
+  const { result, CZKAmount, handleAmountChange, selectedCurrency, handleCurrencyChange } = useConverter(rates);
 
   return (
     <ConverterSection>
