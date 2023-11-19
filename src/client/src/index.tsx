@@ -13,7 +13,7 @@ const GlobalStyle = createGlobalStyle`
   body {
     font-family: 'Nunito Sans', sans-serif;
     background: rgb(255,255,255);
-    background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(96,114,143,1) 98%);
+    background: linear-gradient(156deg, rgba(255, 255, 255, 1), rgb(255, 230, 212) 46.64%, rgb(78 44 117) 97.9%);
     color: #333;
     font-weight: 500;
   }

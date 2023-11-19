@@ -31,7 +31,7 @@ const RateCard = styled.div<{ $isSelected: boolean }>`
   border-radius: 10px;
   justify-content: space-between;
   cursor: pointer;
-  ${(props) => props.$isSelected && mainGradient};
+  ${(props) => props.$isSelected && `background: linear-gradient(92deg, rgba(152, 47, 47, 1), rgb(69 42 101) 33.61%)`};
 `;
 
 const CountryFlag: FC<{ countryCode: string }> = ({ countryCode }) => {

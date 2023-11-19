@@ -1,11 +1,10 @@
 import styled from 'styled-components';
-import { mainGradient } from './styled';
 
 const Title = styled.h1`
   margin-top: 50px;
   font-size: 4em;
   text-align: center;
-  ${mainGradient}
+  background: linear-gradient(313deg, rgb(103 52 161), rgb(28, 28, 30) 51%, rgba(186, 24, 178, 0.73));
   background-repeat: repeat;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

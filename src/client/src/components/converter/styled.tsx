@@ -1,18 +1,33 @@
 import styled, { css } from 'styled-components';
+import { mainGradient } from '../styled';
 
 export const Title = styled.h2`
   text-align: center;
+  background: linear-gradient(233deg, rgb(162 198 255) 0%, rgb(28 28 30) 4%, rgb(186 24 178 / 73%) 100%);
+  background-repeat: repeat;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-background-clip: text;
+  -moz-text-fill-color: transparent;
 `;
 
 export const ConverterSection = styled.section`
   display: flex;
   align-items: center;
   flex-direction: column;
-  margin: 40px 0 60px;
-  background: rgb(255, 255, 255);
-  box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+  margin: 40px 0;
+
+  box-shadow: -28px -8px 100px 22px rgba(163, 67, 128, 0.3);
   border-radius: 10px;
   padding: 0 20px 20px;
+  background-image: linear-gradient(
+    122deg,
+    rgba(225, 181, 181, 0.2),
+    rgba(255, 64, 64, 0.37) 58.82%,
+    rgba(188, 36, 157, 0.3568627450980392) 100%,
+    rgba(186, 24, 178, 0.45)
+  );
+  background-origin: border-box;
 `;
 
 export const ConversionInputWrapper = styled.div`

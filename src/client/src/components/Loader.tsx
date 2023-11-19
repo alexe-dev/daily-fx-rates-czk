@@ -1,14 +1,22 @@
 import styled from 'styled-components';
+import { mainGradient } from './styled';
 
 export const Loader = styled.div`
   width: 48px;
   height: 48px;
-  border: 5px solid #fff;
-  border-bottom-color: transparent;
+  border: 10px solid transparent;
   border-radius: 50%;
-  display: inline-block;
-  box-sizing: border-box;
-  animation: rotation 1s linear infinite;
+  background-image: linear-gradient(
+      8deg,
+      rgba(134, 66, 201, 0.9),
+      rgba(17, 87, 115, 0.92) 42.02%,
+      rgba(248, 103, 103, 0.97)
+    ),
+    linear-gradient(282deg, #ffd5a9, #ff7fd1);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+
+  animation: rotation 0.5s linear infinite;
 
   @keyframes rotation {
     0% {
