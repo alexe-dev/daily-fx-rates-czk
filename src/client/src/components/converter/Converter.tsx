@@ -31,7 +31,7 @@ export const Converter: FC<ConverterProps> = ({ rates }) => {
             // https://technology.blog.gov.uk/2020/02/24/why-the-gov-uk-design-system-team-changed-the-input-type-for-numbers/
             type="text"
             inputMode="numeric"
-            pattern="[0-9]*"
+            pattern="^[0-9]*\.[0-9]*$"
             id="czk"
             value={CZKAmount ?? ''}
             onChange={handleAmountChange}
