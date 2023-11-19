@@ -1,10 +1,9 @@
-import { countryCodes } from './countryCodes';
-
-type CountryName = keyof typeof countryCodes;
+import { CountryCode, CountryName, CountryCodeEnum } from './countryCodes';
+import { sortByPopularCurrencies } from './sortByPopularCurrencies';
 
 export type RateData = {
   countryName: CountryName;
-  countryCode: string;
+  countryCode: CountryCode;
   currency: string;
   unit: string;
   currencyCode: string;
@@ -16,7 +15,6 @@ export type FXRatesData = {
   rates: RateData[];
 };
 
-// TODO: add test
 // TODO: consider moving this logic to server side
 export const processCNBData = (data: string): FXRatesData => {
   // https://www.cnb.cz/en/faq/Format-of-the-foreign-exchange-market-rates/
@@ -27,14 +25,33 @@ export const processCNBData = (data: string): FXRatesData => {
   // last element is removed as it is empty string
   const rates = rateRows.map((row) => {
     const [countryName, currency, unit, currencyCode, rate] = row.split('|');
+
     return {
-      countryName: countryName as CountryName,
-      countryCode: countryCodes[countryName as CountryName],
+      countryName: getValidCountryName(countryName),
+      countryCode: getCountryCode(countryName),
       currency,
       unit,
       currencyCode,
       rate,
     };
   });
-  return { date, rates };
+
+  return { date, rates: sortByPopularCurrencies(rates) };
 };
+
+export function getCountryCode(countryName: string): CountryCode {
+  const countryCode = CountryCodeEnum[countryName as CountryName];
+  if (countryCode) {
+    return countryCode as CountryCode;
+  } else {
+    throw new Error(`Country code for country ${countryName} is not found, please add it to CountryCodeEnum`);
+  }
+}
+
+export function getValidCountryName(countryName: string): CountryName {
+  if (Object.keys(CountryCodeEnum).includes(countryName as CountryName)) {
+    return countryName as CountryName;
+  } else {
+    throw new Error(`Country ${countryName} is not found, please add it to CountryCodeEnum`);
+  }
+}

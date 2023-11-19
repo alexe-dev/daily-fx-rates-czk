@@ -43,21 +43,21 @@ USA|dollar|1|USD|22.547
     expect(result.rates).toHaveLength(31);
 
     expect(result.rates[0]).toEqual({
-      countryName: 'Australia',
-      countryCode: 'AU',
-      currency: 'dollar',
-      unit: '1',
-      currencyCode: 'AUD',
-      rate: '14.613',
-    });
-
-    expect(result.rates[result.rates.length - 1]).toEqual({
       countryName: 'USA',
       countryCode: 'US',
       currency: 'dollar',
       unit: '1',
       currencyCode: 'USD',
       rate: '22.547',
+    });
+
+    expect(result.rates[result.rates.length - 1]).toEqual({
+      countryCode: 'TR',
+      countryName: 'Turkey',
+      currency: 'lira',
+      currencyCode: 'TRY',
+      rate: '0.786',
+      unit: '1',
     });
   });
 });

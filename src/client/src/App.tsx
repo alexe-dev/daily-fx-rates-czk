@@ -13,7 +13,7 @@ function App() {
             <Loader />
           </LoaderWrapper>
         )}
-        {/* TODO: create nice error component */}
+        {/* TODO: nice to have: create pretty error component */}
         {!!error && <div>{error.message}</div>}
         {!!data && (
           <>
@@ -23,7 +23,7 @@ function App() {
         )}
       </MainWrapper>
       <FooterWrapper>
-        made with passion by <b>Alex Alexeev</b> in 2023
+        made with &hearts; by <b>Alex Alexeev</b> 2023
       </FooterWrapper>
     </Wrapper>
   );
