@@ -33,15 +33,17 @@ type FXRatesData = {
   rates: RateData[];
 };
 
-export const RateList: FC<{ fxData: FXRatesData }> = ({ fxData }) => {
-  return (
-    <RatesWrapper>
-      <h2>{fxData.date?.toUpperCase()}</h2>
-      <RatesList>
-        {fxData.rates?.map((rate) => (
-          <RateItem key={rate.countryCode} rateData={rate} />
-        ))}
-      </RatesList>
-    </RatesWrapper>
-  );
+type Props = {
+  fxData: FXRatesData;
 };
+
+export const RateList: FC<Props> = ({ fxData }) => (
+  <RatesWrapper>
+    <h2>CZK rates for {fxData.date}</h2>
+    <RatesList>
+      {fxData.rates?.map((rate) => (
+        <RateItem key={rate.countryCode} rateData={rate} />
+      ))}
+    </RatesList>
+  </RatesWrapper>
+);

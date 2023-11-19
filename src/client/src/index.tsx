@@ -5,6 +5,7 @@ import { createGlobalStyle } from 'styled-components';
 
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { RateProvider } from './contexts/RateContext';
 
 const queryClient = new QueryClient();
 
@@ -22,10 +23,12 @@ const GlobalStyle = createGlobalStyle`
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <GlobalStyle />
-      <App />
-    </QueryClientProvider>
+    <RateProvider>
+      <QueryClientProvider client={queryClient}>
+        <GlobalStyle />
+        <App />
+      </QueryClientProvider>
+    </RateProvider>
   </React.StrictMode>
 );
 

@@ -1,14 +1,12 @@
 import styled from 'styled-components';
+import { mainGradient } from './styled';
 
 const Title = styled.h1`
   margin-top: 50px;
   font-size: 4em;
   text-align: center;
-
-  background: linear-gradient(90deg, rgba(205, 36, 36, 1) 0%, rgba(49, 31, 198, 1) 51%, rgba(186, 24, 178, 1) 100%);
-
+  ${mainGradient}
   background-repeat: repeat;
-
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   -moz-background-clip: text;
@@ -18,7 +16,7 @@ const Title = styled.h1`
 export const Header = () => {
   return (
     <header>
-      <Title>CNB FX Daily Rates</Title>
+      <Title>CNB Exchange Rates</Title>
     </header>
   );
 };

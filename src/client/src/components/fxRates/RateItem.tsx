@@ -3,7 +3,10 @@ import Flags from 'country-flag-icons/react/3x2';
 import styled from 'styled-components';
 import { RateData } from '../../utils/processCNBData';
 
-const RateCard = styled.div`
+import { useRateContext } from '../../contexts';
+import { mainGradient } from '../styled';
+
+const RateCard = styled.div<{ $isSelected: boolean }>`
   display: flex;
   width: 200px;
   @media (max-width: 710px) {
@@ -22,11 +25,13 @@ const RateCard = styled.div`
   align-items: center;
   padding: 10px;
   margin: 5px;
-  border-radius: 10px;
+
   background-color: #1c1c1e;
   color: white;
-  border: 1px solid #1c1c1e;
+  border-radius: 10px;
   justify-content: space-between;
+  cursor: pointer;
+  ${(props) => props.$isSelected && mainGradient};
 `;
 
 const CountryFlag: FC<{ countryCode: string }> = ({ countryCode }) => {
@@ -34,12 +39,22 @@ const CountryFlag: FC<{ countryCode: string }> = ({ countryCode }) => {
   return Flag ? <Flag width={30} /> : <span>{countryCode}</span>;
 };
 
-export const RateItem: FC<{ rateData: RateData }> = ({ rateData }) => (
-  <RateCard>
-    <CountryFlag countryCode={rateData.countryCode} />
-    <span>
-      {rateData.amount} {rateData.currencyCode}
-    </span>
-    <span>{rateData.rate}</span>
-  </RateCard>
-);
+type Props = {
+  rateData: RateData;
+};
+
+export const RateItem: FC<Props> = ({ rateData }) => {
+  const { setRateCurrency, rateCurrency } = useRateContext();
+
+  const handleClick = () => setRateCurrency(rateData.currencyCode);
+  console.log(rateData.currencyCode === rateCurrency);
+  return (
+    <RateCard onClick={handleClick} $isSelected={rateData.currencyCode === rateCurrency}>
+      <CountryFlag countryCode={rateData.countryCode} />
+      <span>
+        {rateData.amount} {rateData.currencyCode}
+      </span>
+      <span>{rateData.rate}</span>
+    </RateCard>
+  );
+};
