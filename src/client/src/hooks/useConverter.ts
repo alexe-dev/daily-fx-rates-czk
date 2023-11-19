@@ -19,7 +19,6 @@ export const useConverter = (rates: RateData[]) => {
       // it would require additional work to allow czech localized number input,
       // including parsing to Number from formatted by Intl.NumberFormat
       if (Number.isNaN(+value)) {
-        console.log('invalid value');
         return;
       }
 

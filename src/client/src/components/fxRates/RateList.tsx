@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import styled from 'styled-components';
 import { RateItem } from './RateItem';
+import { RateData } from '../../utils/processCNBData';
 
 const RatesWrapper = styled.section`
   display: flex;
@@ -18,18 +19,8 @@ const RatesList = styled.div`
   justify-content: center;
 `;
 
-type RateData = {
-  countryName: string;
-  countryCode: string;
-  currency: string;
-  amount: string;
-  currencyCode: string;
-  rate: string;
-};
-
 type FXRatesData = {
   date: string;
-  headers: string[];
   rates: RateData[];
 };
 

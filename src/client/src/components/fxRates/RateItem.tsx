@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { RateData } from '../../utils/processCNBData';
 
 import { useRateContext } from '../../contexts';
-import { mainGradient } from '../styled';
 
 const RateCard = styled.div<{ $isSelected: boolean }>`
   display: flex;
@@ -47,7 +46,7 @@ export const RateItem: FC<Props> = ({ rateData }) => {
   const { setRateCurrency, rateCurrency } = useRateContext();
 
   const handleClick = () => setRateCurrency(rateData.currencyCode);
-  console.log(rateData.currencyCode === rateCurrency);
+  console.log(`${rateData.countryName}: '${rateData.countryCode}'`);
   return (
     <RateCard onClick={handleClick} $isSelected={rateData.currencyCode === rateCurrency}>
       <CountryFlag countryCode={rateData.countryCode} />

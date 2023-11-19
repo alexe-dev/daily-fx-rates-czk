@@ -1,7 +1,9 @@
-import { countryCodes } from '../countryCodes';
+import { countryCodes } from './countryCodes';
+
+type CountryName = keyof typeof countryCodes;
 
 export type RateData = {
-  countryName: string;
+  countryName: CountryName;
   countryCode: string;
   currency: string;
   amount: string;
@@ -11,27 +13,29 @@ export type RateData = {
 
 export type FXRatesData = {
   date: string;
-  headers: string[];
   rates: RateData[];
 };
 
 // TODO: add test
-
+// TODO: consider moving this logic to server side
 export const processCNBData = (data: string): FXRatesData => {
-  // TODO: refactor not to be so hacky, maybe move to server side
+  // https://www.cnb.cz/en/faq/Format-of-the-foreign-exchange-market-rates/
   const dataArray = data?.split('\n');
-  const date = dataArray?.[0].split('#')[0];
-  const headers = dataArray?.[1].split('|');
-  const rows = dataArray?.slice(2, -1).map((row) => row.split('|'));
-  // last row is removed as it is empty
+  const [dateString, _, ...rateRows] = dataArray;
+  const date = dateString.split('#')[0];
+  // last element is removed as it is empty string
+  const rows = rateRows.slice(0, rateRows.length - 1).map((row) => row.split('|'));
 
-  const rates = rows?.map((row) => ({
-    countryName: row[0],
-    countryCode: countryCodes[row[0] as keyof typeof countryCodes],
-    currency: row[1],
-    amount: row[2],
-    currencyCode: row[3],
-    rate: row[4],
-  }));
-  return { date, headers, rates };
+  const rates = rows?.map((row) => {
+    const [countryName, currency, amount, currencyCode, rate] = row;
+    return {
+      countryName: countryName as CountryName,
+      countryCode: countryCodes[countryName as CountryName],
+      currency,
+      amount,
+      currencyCode,
+      rate,
+    };
+  });
+  return { date, rates };
 };
