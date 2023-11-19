@@ -5,7 +5,6 @@ import { useCNBData } from '../hooks';
 import { FXRatesData } from '../utils/processCNBData';
 
 type RateContextProps = {
-  // TODO: create enum for currency codes
   rateCurrency: string;
   setRateCurrency: (currencyCode: string) => void;
   isDataPending: boolean;

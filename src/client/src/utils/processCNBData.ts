@@ -6,7 +6,7 @@ export type RateData = {
   countryName: CountryName;
   countryCode: string;
   currency: string;
-  amount: string;
+  unit: string;
   currencyCode: string;
   rate: string;
 };
@@ -20,19 +20,18 @@ export type FXRatesData = {
 // TODO: consider moving this logic to server side
 export const processCNBData = (data: string): FXRatesData => {
   // https://www.cnb.cz/en/faq/Format-of-the-foreign-exchange-market-rates/
-  const dataArray = data?.split('\n');
-  const [dateString, _, ...rateRows] = dataArray;
-  const date = dateString.split('#')[0];
-  // last element is removed as it is empty string
-  const rows = rateRows.slice(0, rateRows.length - 1).map((row) => row.split('|'));
+  const dataArray = data?.split('\n').slice(0, -1); // remove last element as it is empty string
+  const [dateString, _headers, ...rateRows] = dataArray;
+  const date = dateString.split('#')[0].trim();
 
-  const rates = rows?.map((row) => {
-    const [countryName, currency, amount, currencyCode, rate] = row;
+  // last element is removed as it is empty string
+  const rates = rateRows.map((row) => {
+    const [countryName, currency, unit, currencyCode, rate] = row.split('|');
     return {
       countryName: countryName as CountryName,
       countryCode: countryCodes[countryName as CountryName],
       currency,
-      amount,
+      unit,
       currencyCode,
       rate,
     };

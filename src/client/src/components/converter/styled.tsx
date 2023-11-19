@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components';
-import { mainGradient } from '../styled';
 
 export const Title = styled.h2`
   text-align: center;
@@ -46,7 +45,7 @@ export const ConversionInner = styled.div`
 export const baseConversionStyles = css`
   display: flex;
   align-items: center;
-  box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.5), 0 0 0 5px transparent;
+  box-shadow: 0 0 13px -2px rgba(50, 31, 71, 1), 0 0 0 5px transparent;
   background-color: #1c1c1e;
   color: #fff;
   border: none;
@@ -91,6 +90,7 @@ export const CurrencySelect = styled.select`
   }
   height: 40px;
   padding: 10px;
+  // replaces the default arrow with a custom one for more control over styling
   -webkit-appearance: none;
   -moz-appearance: none;
   background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
@@ -99,7 +99,7 @@ export const CurrencySelect = styled.select`
   background-position-y: 7px;
 `;
 
-export const ConversionResult = styled.div`
+export const ConversionResultInput = styled.input`
   ${baseConversionStyles}
 
   padding: 10px;

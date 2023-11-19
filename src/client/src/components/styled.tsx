@@ -30,7 +30,3 @@ export const LoaderWrapper = styled.div`
   align-items: center;
   flex: 1;
 `;
-
-export const mainGradient = css`
-  background: linear-gradient(90deg, rgba(205, 36, 36, 1) 0%, rgba(49, 31, 198, 1) 51%, rgba(186, 24, 178, 1) 100%);
-`;

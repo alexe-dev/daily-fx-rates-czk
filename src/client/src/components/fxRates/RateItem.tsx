@@ -51,7 +51,7 @@ export const RateItem: FC<Props> = ({ rateData }) => {
     <RateCard onClick={handleClick} $isSelected={rateData.currencyCode === rateCurrency}>
       <CountryFlag countryCode={rateData.countryCode} />
       <span>
-        {rateData.amount} {rateData.currencyCode}
+        {rateData.unit} {rateData.currencyCode}
       </span>
       <span>{rateData.rate}</span>
     </RateCard>

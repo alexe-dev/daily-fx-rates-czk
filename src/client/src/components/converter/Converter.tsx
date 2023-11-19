@@ -3,7 +3,7 @@ import {
   ConverterSection,
   ConversionInner,
   ConversionInputWrapper,
-  ConversionResult,
+  ConversionResultInput,
   CZKInput,
   CZKLabel,
   Title,
@@ -17,7 +17,7 @@ type ConverterProps = {
 };
 
 export const Converter: FC<ConverterProps> = ({ rates }) => {
-  const { result, CZKAmount, handleAmountChange, selectedCurrency, handleCurrencyChange } = useConverter(rates);
+  const { currencyAmount, CZKAmount, handleAmountChange, selectedCurrency, handleCurrencyChange } = useConverter(rates);
 
   return (
     <ConverterSection>
@@ -29,12 +29,14 @@ export const Converter: FC<ConverterProps> = ({ rates }) => {
             // type="number" is problematic, for example if user adds . symbol without any number after it - value will be NaN
             // there are many articles on why text is better option, here is one of them:
             // https://technology.blog.gov.uk/2020/02/24/why-the-gov-uk-design-system-team-changed-the-input-type-for-numbers/
+            // in general, text is better option for input type, because it gives more control
             type="text"
+            // inputMode="decimal" is to show decimal keyboard on mobile devices
             inputMode="decimal"
             pattern="[0-9]*"
             id="czk"
             value={CZKAmount ?? ''}
-            onChange={handleAmountChange}
+            onChange={handleAmountChange(true)}
           />
         </ConversionInputWrapper>
         <ConversionInputWrapper>
@@ -47,7 +49,13 @@ export const Converter: FC<ConverterProps> = ({ rates }) => {
               );
             })}
           </CurrencySelect>
-          <ConversionResult>{result}</ConversionResult>
+          <ConversionResultInput
+            type="text"
+            inputMode="decimal"
+            id="currency"
+            value={currencyAmount ?? ''}
+            onChange={handleAmountChange(false)}
+          />
         </ConversionInputWrapper>
       </ConversionInner>
     </ConverterSection>

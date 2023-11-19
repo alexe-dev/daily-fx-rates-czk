@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { mainGradient } from './styled';
 
 export const Loader = styled.div`
   width: 48px;

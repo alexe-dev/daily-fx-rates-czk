@@ -1,23 +1,47 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { RateData } from '../utils/processCNBData';
 import { useRateContext } from '../contexts';
 
-export const useConverter = (rates: RateData[]) => {
-  // we could fetch rates here, but as is already fetched in App.tsx, we can pass it as prop to both RateList and Converter
-  // TODO: consider moving rates fetching to RateContext
+const calculateTotal = (amount: string, rate: string, rateUnit: string, isFromCZK: boolean) => {
+  // this could be localized with `new Intl.NumberFormat('cs-CZ').format(result)` but I kept it simple for now
 
+  let result;
+  if (isFromCZK) {
+    result = ((+amount / +rate) * +rateUnit).toFixed(3); // rounding to only 3 decimals for better readability
+  } else {
+    result = ((+amount * +rate) / +rateUnit).toFixed(3);
+  }
+  // parsefloat used here to remove trailing zeros from floating point number
+  return parseFloat(result).toString();
+};
+
+export const useConverter = (rates: RateData[]) => {
   const { rateCurrency: selectedCurrency, setRateCurrency: setSelectedCurrency } = useRateContext();
 
   const [CZKAmount, setCZKAmount] = useState('1000');
+  const [currencyAmount, setCurrencyAmount] = useState('0');
+
+  const selectedCurrencyInfo = useMemo(
+    () => rates?.find((rate) => rate.currencyCode === selectedCurrency),
+    [selectedCurrency, rates]
+  );
+
+  useEffect(() => {
+    // calcualte currency total from default CZK amount on first load and when selected currency changes
+    if (selectedCurrencyInfo) {
+      const total = calculateTotal(CZKAmount, selectedCurrencyInfo.rate, selectedCurrencyInfo.unit, true);
+      setCurrencyAmount(total);
+    }
+  }, [selectedCurrencyInfo]);
 
   const handleAmountChange = useCallback(
-    (e: React.FormEvent<HTMLInputElement>) => {
+    (isCZK: boolean) => (e: React.FormEvent<HTMLInputElement>) => {
       const value = e.currentTarget.value;
       // quick validation to prevent user from entering non numeric values
       // allows valid numbers (including 0 and numbers starting with 0) and empty string
 
       // it would require additional work to allow czech localized number input,
-      // including parsing to Number from formatted by Intl.NumberFormat
+      // as well as to parse back to Number type
 
       // because of that, entering ',' for decimal is allowed but it is replaced with '.' for consistency
       const valueWithDot = value.replace(',', '.');
@@ -25,26 +49,29 @@ export const useConverter = (rates: RateData[]) => {
         return;
       }
 
-      setCZKAmount(valueWithDot);
+      if (selectedCurrencyInfo) {
+        if (isCZK) {
+          // there is some repetition here, further refactoring could be done
+          setCZKAmount(valueWithDot);
+          const total = calculateTotal(valueWithDot, selectedCurrencyInfo.rate, selectedCurrencyInfo.unit, true);
+          setCurrencyAmount(total);
+        } else {
+          setCurrencyAmount(valueWithDot);
+          const totalCZK = calculateTotal(valueWithDot, selectedCurrencyInfo.rate, selectedCurrencyInfo.unit, false);
+          setCZKAmount(totalCZK);
+        }
+      }
     },
-    [setCZKAmount]
+    [setCZKAmount, setCurrencyAmount, selectedCurrencyInfo]
   );
 
   const handleCurrencyChange = (e: React.FormEvent<HTMLSelectElement>) => setSelectedCurrency(e.currentTarget.value);
 
-  const selectedCurrencyInfo = useMemo(
-    () => rates?.find((rate) => rate.currencyCode === selectedCurrency),
-    [selectedCurrency, rates]
-  );
-
-  const result = useMemo(() => {
-    if (!selectedCurrencyInfo || !CZKAmount) return null;
-
-    // rounding to only 3 decimals for better UX
-    // parsefloat used here to remove trailing zeros from floating point number
-    return parseFloat(((+CZKAmount / +selectedCurrencyInfo.rate) * +selectedCurrencyInfo.amount).toFixed(3));
-    // could be localized with `new Intl.NumberFormat('cs-CZ').format(result)` but I kept it simple for consistency with input
-  }, [CZKAmount, selectedCurrencyInfo]);
-
-  return { result, CZKAmount, selectedCurrency, handleAmountChange, handleCurrencyChange };
+  return {
+    CZKAmount,
+    selectedCurrency,
+    handleAmountChange,
+    handleCurrencyChange,
+    currencyAmount,
+  };
 };
