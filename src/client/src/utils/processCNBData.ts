@@ -19,7 +19,7 @@ export type FXRatesData = {
 export const processCNBData = (data: string): FXRatesData => {
   // https://www.cnb.cz/en/faq/Format-of-the-foreign-exchange-market-rates/
   const dataArray = data?.split('\n').slice(0, -1); // remove last element as it is empty string
-  const [dateString, _headers, ...rateRows] = dataArray;
+  const [dateString, , ...rateRows] = dataArray;
   const date = dateString.split('#')[0].trim();
 
   // last element is removed as it is empty string

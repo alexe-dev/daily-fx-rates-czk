@@ -32,7 +32,7 @@ export const useConverter = (rates: RateData[]) => {
       const total = calculateTotal(CZKAmount, selectedCurrencyInfo.rate, selectedCurrencyInfo.unit, true);
       setCurrencyAmount(total);
     }
-  }, [selectedCurrencyInfo]);
+  }, [selectedCurrencyInfo, CZKAmount]);
 
   const handleAmountChange = useCallback(
     (isCZK: boolean) => (e: React.FormEvent<HTMLInputElement>) => {
